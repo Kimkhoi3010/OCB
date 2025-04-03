@@ -28,6 +28,9 @@ function getMatchedCSSRules(a) {
             if (rules) {
                 for (r = rules.length-1; r >= 0; r--) {
                     var selectorText = rules[r].selectorText;
+                    if(selectorText && selectorText.includes(":is(")) {
+                        selectorText = selectorText.replace(/:is\((.*?)\)/g, "$1");
+                    }
                     if (selectorText &&
                             rules[r].cssText &&
                             selectorText !== '*' &&
